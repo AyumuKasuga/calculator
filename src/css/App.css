@@ -1,0 +1,15 @@
+.App {
+    background-color: #9E9E9E;
+    height: 500px;
+    display: flex;
+}
+
+.buttonMatrix {
+    height: 60%;
+    width: 100%;
+}
+
+.buttonRow {
+    width: 100%;
+    display: flex;
+}

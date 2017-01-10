@@ -21,14 +21,32 @@ export class App extends Component {
             ['.', '0', '=']
         ]
 
+        const sideButtons = [
+            ['DEL'],
+            ['÷'],
+            ['x'],
+            ['-'],
+            ['+'],
+        ]
+
         return (
             <MuiThemeProvider>
                 <div className="App">
-                    <ButtonSet
-                        buttons={mainButtons}
-                        pressHandler={(label) => this.buttonPressHandler(label)}
-                        name="main"
-                    />
+                    <div className="screen">
+                        127+345
+                    </div>
+                    <div className="buttons">
+                        <ButtonSet
+                            buttons={mainButtons}
+                            pressHandler={(label) => this.buttonPressHandler(label)}
+                            className="mainButtonMatrix"
+                        />
+                        <ButtonSet
+                            buttons={sideButtons}
+                            pressHandler={(label) => this.buttonPressHandler(label)}
+                            className="sideButtonMatrix"
+                        />
+                    </div>
                 </div>
             </MuiThemeProvider>
         );

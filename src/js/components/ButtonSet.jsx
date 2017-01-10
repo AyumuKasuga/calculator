@@ -5,9 +5,12 @@ import FlatButton from 'material-ui/FlatButton'
 export class ButtonSet extends Component {
     render() {
 
+        const rowStyle = {
+            height: 100/this.props.buttons.length + '%'
+        }
 
         let buttons = this.props.buttons.map((row, i) => (
-            <div className="buttonRow" key={"row-" + this.props.name + i}>
+            <div className="buttonRow" style={rowStyle} key={"row-" + this.props.name + i}>
                 {row.map((label, i) => (
                     <FlatButton
                         labelStyle={{
@@ -15,7 +18,10 @@ export class ButtonSet extends Component {
                             fontSize: '20px'
                         }}
                         style={{
-                            margin: 'auto'
+                            margin: 'auto',
+                            height: '100%',
+                            width: '100%',
+                            minWidth: '50px'
                         }}
                         label={label}
                         key={label}
@@ -25,7 +31,7 @@ export class ButtonSet extends Component {
             </div>
         ))
         return (
-            <div className="buttonMatrix">
+            <div className={this.props.className}>
                 {buttons.map((button) => (
                     button
                 ))}

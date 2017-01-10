@@ -10,7 +10,9 @@ export class Screen extends Component {
                 <div className="screenMainLine">
                     {this.props.mainLineText}
                 </div>
-                <div className="screenSecondLine"></div>
+                <div className="screenSecondLine">
+                    {this.props.secondLineText}
+                </div>
             </div>
         )
     }

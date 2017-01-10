@@ -11,9 +11,10 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const DEL_BUTTON = 'DEL'
+const CLR_BUTTON = 'CLR'
 const RESULT_BUTTON = '='
 const REPLACE_MAP = {
-    'x': '*',
+    '⨉': '*',
     '÷': '/'
 }
 
@@ -27,14 +28,28 @@ export class App extends Component {
     getDefaultState(){
         return {
             screenMainLine: "",
-            isResult: false
+            screenSecondLine: "",
+            delButton: DEL_BUTTON,
         }
     }
 
     addScreenSymbol(symbol){
+        let screenMainLine = this.state.screenMainLine
+
+        if(this.state.delButton === CLR_BUTTON){  /* we have result on the screen, let's clear it */
+            screenMainLine = ''
+            this.setState({
+                delButton: DEL_BUTTON,
+            })
+        }
+
         this.setState({
-            screenMainLine: this.state.screenMainLine.concat(symbol)
+            screenMainLine: screenMainLine.concat(symbol)
         })
+    }
+
+    flushScreen(){
+        this.setState({screenMainLine: ''})
     }
 
     removeLastScreenSymbol(){
@@ -48,7 +63,8 @@ export class App extends Component {
         let calculateResult = this.calculateResult()
         if(calculateResult !== null){
             this.setState({
-                screenMainLine: calculateResult.toString()
+                screenMainLine: calculateResult.toString(),
+                delButton: CLR_BUTTON,
             })
         }
     }
@@ -72,6 +88,9 @@ export class App extends Component {
     buttonPressHandler(label){
         if(label===DEL_BUTTON){
             this.removeLastScreenSymbol()
+        }else if(label===CLR_BUTTON){
+            this.flushScreen()
+            this.setState({delButton: DEL_BUTTON})
         }else if(label===RESULT_BUTTON){
             this.calculateResultAndShow()
         }else{
@@ -89,9 +108,9 @@ export class App extends Component {
         ]
 
         const sideButtons = [
-            [DEL_BUTTON],
+            [this.state.delButton],
             ['÷'],
-            ['x'],
+            ['⨉'],
             ['-'],
             ['+'],
         ]
@@ -99,7 +118,10 @@ export class App extends Component {
         return (
             <MuiThemeProvider>
                 <div className="App">
-                    <Screen mainLineText={this.state.screenMainLine}/>
+                    <Screen
+                        mainLineText={this.state.screenMainLine}
+                        secondLineText={this.state.screenSecondLine}
+                    />
                     <div className="buttons">
                         <ButtonSet
                             buttons={mainButtons}

@@ -5,24 +5,24 @@
 .mainButtonMatrix {
     background-color: #424242;
     height: 100%;
-    width: 80%;
+    width: 75%;
 }
 
 .sideButtonMatrix {
     background-color: #616161;
     height: 100%;
-    width: 20%;
+    width: 25%;
 }
 
 .buttons {
     display: flex;
-    height: 60%;
+    height: 70%;
     width: 100%;
 }
 
 .screen {
     width: 100%;
-    height: 40%;
+    height: 30%;
     background-color: white;
     color: #9E9E9E;
 }
@@ -49,4 +49,8 @@
 .screenSecondLine {
     width: 100%;
     height: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 26px;
 }

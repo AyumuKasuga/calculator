@@ -15,7 +15,8 @@ export class ButtonSet extends Component {
                     <FlatButton
                         labelStyle={{
                             color: 'white',
-                            fontSize: '20px',
+                            fontSize: '30px',
+                            fontWeight: '0'
                         }}
                         style={{
                             margin: 'auto',
@@ -23,6 +24,7 @@ export class ButtonSet extends Component {
                             width: '100%',
                             minWidth: '50px'
                         }}
+                        hoverColor={null}
                         label={label}
                         key={label}
                         onTouchTap={() => this.props.pressHandler(label)}

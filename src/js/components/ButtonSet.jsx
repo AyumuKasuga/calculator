@@ -15,7 +15,7 @@ export class ButtonSet extends Component {
                     <FlatButton
                         labelStyle={{
                             color: 'white',
-                            fontSize: '20px'
+                            fontSize: '20px',
                         }}
                         style={{
                             margin: 'auto',

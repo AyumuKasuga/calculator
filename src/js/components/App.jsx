@@ -33,6 +33,15 @@ export class App extends Component {
         }
     }
 
+    tryCalculate(){
+        let newResult = this.calculateResult()
+        let screenSecondLineText = ''
+        if(newResult !== null && newResult.toString() !== this.state.screenMainLine){
+            screenSecondLineText = newResult
+        }
+        this.setState({screenSecondLine: screenSecondLineText.toString()})
+    }
+
     addScreenSymbol(symbol){
         let screenMainLine = this.state.screenMainLine
 
@@ -45,7 +54,7 @@ export class App extends Component {
 
         this.setState({
             screenMainLine: screenMainLine.concat(symbol)
-        })
+        }, this.tryCalculate)
     }
 
     flushScreen(){
@@ -56,7 +65,7 @@ export class App extends Component {
         let len = this.state.screenMainLine.length
         this.setState({
             screenMainLine: this.state.screenMainLine.substring(0, len-1)
-        })
+        }, this.tryCalculate)
     }
 
     calculateResultAndShow(){

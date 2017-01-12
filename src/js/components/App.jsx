@@ -10,9 +10,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
+const MAX_CHAR = 14
 const DEL_BUTTON = 'DEL'
 const CLR_BUTTON = 'CLR'
 const RESULT_BUTTON = '='
+
 const REPLACE_MAP = {
     '⨉': '*',
     '÷': '/'
@@ -44,35 +46,50 @@ export class App extends Component {
 
     addScreenSymbol(symbol){
         let screenMainLine = this.state.screenMainLine
+        let len = screenMainLine.length
+        let newSymbolIsNumber = !isNaN(parseInt(symbol, 0))
 
         if(this.state.delButton === CLR_BUTTON){  /* we have result on the screen, let's clear it */
-            screenMainLine = ''
+            if(newSymbolIsNumber){
+                screenMainLine = ''
+            }
             this.setState({
                 delButton: DEL_BUTTON,
             })
         }
 
-        this.setState({
-            screenMainLine: screenMainLine.concat(symbol)
-        }, this.tryCalculate)
-    }
+        if(isNaN(parseInt(screenMainLine.substring(len-1, len), 0)) && !newSymbolIsNumber){
+            if(len !== 0){
+                screenMainLine = screenMainLine.substring(0, len-1) + symbol
+            }
+        }else{
+            screenMainLine = screenMainLine.concat(symbol)
+        }
 
-    flushScreen(){
-        this.setState({screenMainLine: ''})
+        if(len>=MAX_CHAR){
+            return
+        }
+
+        this.setState({
+            screenMainLine: screenMainLine
+        }, this.tryCalculate)
     }
 
     removeLastScreenSymbol(){
         let len = this.state.screenMainLine.length
-        this.setState({
-            screenMainLine: this.state.screenMainLine.substring(0, len-1)
-        }, this.tryCalculate)
+        if(len !== 0){
+            this.setState({
+                screenMainLine: this.state.screenMainLine.substring(0, len-1)
+            }, this.tryCalculate)
+        }
     }
 
     calculateResultAndShow(){
         let calculateResult = this.calculateResult()
-        if(calculateResult !== null){
+        if(calculateResult !== null && calculateResult.toString() !== this.state.screenMainLine){
             this.setState({
                 screenMainLine: calculateResult.toString(),
+                screenSecondLine: '',
                 delButton: CLR_BUTTON,
             })
         }
@@ -80,6 +97,7 @@ export class App extends Component {
 
     calculateResult(){
         let filteredInput = this.state.screenMainLine
+
         for(let symbol in REPLACE_MAP){
             if (REPLACE_MAP.hasOwnProperty(symbol)) {
                 filteredInput = filteredInput.replace(new RegExp(symbol, 'g'), REPLACE_MAP[symbol])
@@ -88,8 +106,9 @@ export class App extends Component {
         let evalResult = null
         try{
             evalResult = eval(filteredInput)
-        }catch(e){
-            console.log(e)
+            if(evalResult===undefined){evalResult=null}
+        }catch(_){
+            /* just do nothing in this case */
         }
         return evalResult
     }
@@ -98,8 +117,10 @@ export class App extends Component {
         if(label===DEL_BUTTON){
             this.removeLastScreenSymbol()
         }else if(label===CLR_BUTTON){
-            this.flushScreen()
-            this.setState({delButton: DEL_BUTTON})
+            this.setState({
+                delButton: DEL_BUTTON,
+                screenMainLine: ''
+            })
         }else if(label===RESULT_BUTTON){
             this.calculateResultAndShow()
         }else{

@@ -15,14 +15,14 @@ export class ButtonSet extends Component {
                     <FlatButton
                         labelStyle={{
                             color: 'white',
-                            fontSize: '30px',
+                            fontSize: '5vh',
                             fontWeight: '0'
                         }}
                         style={{
                             margin: 'auto',
                             height: '100%',
                             width: '100%',
-                            minWidth: '50px'
+                            minWidth: '10px'
                         }}
                         hoverColor={null}
                         label={label}

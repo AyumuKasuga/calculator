@@ -10,7 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-const MAX_CHAR = 18
+const MAX_CHAR = 16
 const DEL_BUTTON = 'DEL'
 const CLR_BUTTON = 'CLR'
 const RESULT_BUTTON = '='

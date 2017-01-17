@@ -35,6 +35,7 @@ export class App extends Component {
         }
     }
 
+
     tryCalculate(){
         let newResult = this.calculateResult()
         let screenSecondLineText = ''

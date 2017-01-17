@@ -10,7 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-const MAX_CHAR = 14
+const MAX_CHAR = 18
 const DEL_BUTTON = 'DEL'
 const CLR_BUTTON = 'CLR'
 const RESULT_BUTTON = '='
@@ -104,6 +104,9 @@ export class App extends Component {
             }
         }
         let evalResult = null
+        // let numbers = filteredInput.split(new RegExp("[^0-9.]")).map((num) => (bigInt(num)))
+        // let actions = filteredInput.split(new RegExp("[0-9.]+")).filter((el) => (el.length != 0))
+
         try{
             evalResult = eval(filteredInput)
             if(evalResult===undefined){evalResult=null}

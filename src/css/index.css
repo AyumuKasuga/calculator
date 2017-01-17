@@ -2,7 +2,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  max-width: 300px;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
   margin: auto;
   margin-top: 40px;
   background-color: #212121;

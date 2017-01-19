@@ -24,7 +24,7 @@ export class ButtonSet extends Component {
                             width: '100%',
                             minWidth: '10px'
                         }}
-                        hoverColor={null}
+                        hoverColor={'none'}
                         label={label}
                         key={label}
                         onTouchTap={() => this.props.pressHandler(label)}

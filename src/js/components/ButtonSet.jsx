@@ -16,7 +16,7 @@ export class ButtonSet extends Component {
                         labelStyle={{
                             color: 'white',
                             fontSize: '5vh',
-                            fontWeight: '0'
+                            fontWeight: '100'
                         }}
                         style={{
                             margin: 'auto',

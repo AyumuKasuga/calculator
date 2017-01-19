@@ -16,7 +16,7 @@ const CLR_BUTTON = 'CLR'
 const RESULT_BUTTON = '='
 
 const REPLACE_MAP = {
-    '⨉': '*',
+    '×': '*',
     '÷': '/'
 }
 
@@ -145,7 +145,7 @@ export class App extends Component {
         const sideButtons = [
             [this.state.delButton],
             ['÷'],
-            ['⨉'],
+            ['×'],
             ['-'],
             ['+'],
         ]

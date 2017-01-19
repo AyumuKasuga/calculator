@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 
 export class Screen extends Component {
-    render(){
 
+    render(){
         return (
             <div className="screen">
                 <div className="screenSpaceLine"></div>

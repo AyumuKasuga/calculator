@@ -10,7 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-export const MAX_CHARS = 13
+const MAX_CHARS = 13
 const DEL_BUTTON = 'DEL'
 const CLR_BUTTON = 'CLR'
 const RESULT_BUTTON = '='
@@ -67,7 +67,7 @@ export class App extends Component {
             screenMainLine = screenMainLine.concat(symbol)
         }
 
-        if(len>=MAX_CHARS){
+        if(len>MAX_CHARS){
             return
         }
 
@@ -88,8 +88,12 @@ export class App extends Component {
     calculateResultAndShow(){
         let calculateResult = this.calculateResult()
         if(calculateResult !== null && calculateResult.toString() !== this.state.screenMainLine){
+            let mainLineText = calculateResult.toString()
+            if(mainLineText.length > MAX_CHARS && mainLineText.indexOf('.') !== -1){ // Dirty hack
+                mainLineText = mainLineText.substr(0, MAX_CHARS)
+            }
             this.setState({
-                screenMainLine: calculateResult.toString(),
+                screenMainLine: mainLineText,
                 screenSecondLine: '',
                 delButton: CLR_BUTTON,
             })

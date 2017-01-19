@@ -1,6 +1,6 @@
 {
   "name": "Calculator",
-  "homepage": "http://ayumukasuga.github.io/calc",
+  "homepage": "http://ayumukasuga.github.io/calculator",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
